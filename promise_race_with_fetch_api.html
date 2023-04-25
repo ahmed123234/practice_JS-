@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    </head>
+    <body>
+        <h2>Using the Promise.race()</h2>
+        <div id="output"></div>
+        <button onclick="executeRace()">Featch data from early promise</button>
+        <script>
+
+            async function executeRace() {
+                // array of different promise
+                const requests = [
+                    fetch('https://api.publicapis.org/entries'),
+                    fetch('https://catfact.ninja/fact'),
+                    fetch('https://api.coindesk.com/v1/bpi/currentprice.json'),
+                ];
+
+                // resolving the promises using the race() method
+                const res =  await Promise.race(requests);
+
+                $('#output').html(`The first promise resolved is ${res.url}`);
+            }
+        
+        </script>
+    </body>
+</html>

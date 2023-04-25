@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    </head>
+    <body>
+        <h2>Using the Promise.race()</h2>
+        <div id="output"></div>
+        <script>
+            let promise_1 = new Promise((res, rej) => {
+                setTimeout(() => {
+                    res("Resolved promise with time of 1000 miliseconds");
+                }, 1000);
+            });
+
+             let promise_2 = new Promise((res, rej) => {
+                setTimeout(() => {
+                    rej("This promise is rejected!");
+                }, 500);
+            });
+
+             let promise_3 = new Promise((res, rej) => {
+                setTimeout(() => {
+                    res("Resolved promise with time of 2000 miliseconds");
+                }, 2000);
+            });
+
+            Promise.race([promise_1, promise_2, promise_3]).then((response) => {
+                $('#output').html(`Promise resolved Successfully. The promise value is  ${response}`)
+            }, (error) => {
+                $('#output').html(`Promise rejected!. The promise value is  ${error}`);
+            })
+            
+            // .catch((error) => {
+            //     $('#output').html(`Promise rejected!. The promise value is  ${error}`)
+                
+            // });
+        </script>
+    </body>
+</html>
